@@ -5,7 +5,7 @@ import Foundation
 extension String {
     /// Check if string is a fuzzy match with another string
     /// - Parameter search: The search string
-    func isFuzzyMatched(using search: String) -> Bool {
+    public func isFuzzyMatched(using search: String) -> Bool {
         var search = search.platformIndependentLowercase().replacingOccurrences(of: " ", with: "")
 
         for char in self.platformIndependentLowercase() {

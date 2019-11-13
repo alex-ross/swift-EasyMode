@@ -16,6 +16,26 @@ extension Date {
 
         return formatter.string(from: self)
     }
+
+    static func from(year: Int, month: Int, day: Int) -> Date {
+        let gregorianCalendar = Calendar(identifier: .gregorian)
+
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+
+        let date = gregorianCalendar.date(from: dateComponents)!
+        return date
+    }
+
+    static func parse(_ string: String, format: String = "yyyy-MM-dd") -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+
+        let date = dateFormatter.date(from: string)!
+        return date
+    }
 }
 
 extension Date {

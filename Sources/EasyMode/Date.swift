@@ -12,9 +12,20 @@ extension Date {
     public var isoDate: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone(abbreviation: "CET")!
 
         return formatter.string(from: self)
+    }
+    public var iso8601Date: String { isoDate }
+
+    public var iso8601: String {
+        if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
+            return ISO8601DateFormatter.string(from: self, timeZone: TimeZone.current, formatOptions: .withInternetDateTime)
+        } else {
+            var buffer = [CChar](repeating: 0, count: 25)
+            var time = time_t(self.timeIntervalSince1970)
+            strftime_l(&buffer, buffer.count, "%FT%T%z", localtime(&time), nil)
+            return String(cString: buffer)
+        }
     }
 
     public static func from(year: Int, month: Int, day: Int) -> Date {

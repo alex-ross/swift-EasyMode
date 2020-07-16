@@ -4,22 +4,22 @@ import Foundation
 
 extension String {
     /// Returns the receiver if it's present otherwise returns nil
-    var presence: String? {
+    public var presence: String? {
         isPresent ? self : nil
     }
 
     /// A string is blank if it's empty or contains whitespaces only
-    var isBlank: Bool {
+    public var isBlank: Bool {
         removingCharacters(from: .whitespacesAndNewlines) == ""
     }
 
     /// A string is present if it's not blank.
-    var isPresent: Bool {
+    public var isPresent: Bool {
         !isBlank
     }
 
     /// Removes characters in character set
-    func removingCharacters(from set: CharacterSet) -> String {
+    public func removingCharacters(from set: CharacterSet) -> String {
         var newString = self
         newString.removeAll { char -> Bool in
             guard let scalar = char.unicodeScalars.first else { return false }

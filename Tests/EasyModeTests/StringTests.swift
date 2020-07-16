@@ -1,5 +1,5 @@
-import XCTest
 @testable import EasyMode
+import XCTest
 
 final class StringTests: XCTestCase {
     func testIsFuzzyMatchedUsing() {
@@ -13,7 +13,21 @@ final class StringTests: XCTestCase {
         XCTAssertFalse("The source string".isFuzzyMatched(using: "thessss"))
     }
 
+    func testPresence() {
+        XCTAssertNil("".presence)
+        XCTAssertNotNil("a".presence)
+    }
+
+    func testIsBlank() {
+        XCTAssertTrue("".isBlank)
+        XCTAssertTrue("\n ".isBlank)
+        XCTAssertTrue(" ".isBlank)
+        XCTAssertFalse(" a".isBlank)
+    }
+
     static var allTests = [
         ("testIsFuzzyMatchedUsing", testIsFuzzyMatchedUsing),
+        ("testPresence", testPresence),
+        ("testIsBlank", testIsBlank),
     ]
 }

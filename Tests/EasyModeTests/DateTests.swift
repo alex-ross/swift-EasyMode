@@ -1,5 +1,5 @@
-import XCTest
 @testable import EasyMode
+import XCTest
 
 class DateTests: XCTestCase {
     func testStartOfWeek() {
@@ -36,12 +36,12 @@ class DateTests: XCTestCase {
 
         XCTAssertEqual("2019-09-08", date.endOfWeek.isoDate)
     }
-    
+
     static var allTests = [
-       ("testStartOfWeek", testStartOfWeek),
-       ("testEndOfWeek", testEndOfWeek),
-       ("testEndOfLastWeek", testEndOfLastWeek),
-       ("testIsoDate", testIsoDate),
-       ("testIsoDateWhenSunday", testIsoDateWhenSunday),
-   ]
+        ("testStartOfWeek", testStartOfWeek),
+        ("testEndOfWeek", testEndOfWeek),
+        ("testEndOfLastWeek", testEndOfLastWeek),
+        ("testIsoDate", testIsoDate),
+        ("testIsoDateWhenSunday", testIsoDateWhenSunday),
+    ]
 }

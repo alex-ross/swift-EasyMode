@@ -2,7 +2,7 @@ import Foundation
 
 extension Date {
     public var startOfWeek: Date {
-       return previous(.monday, considerToday: true)
+        return previous(.monday, considerToday: true)
     }
 
     public var endOfWeek: Date {
@@ -15,6 +15,7 @@ extension Date {
 
         return formatter.string(from: self)
     }
+
     public var iso8601Date: String { isoDate }
 
     public var iso8601: String {
@@ -22,7 +23,7 @@ extension Date {
             return ISO8601DateFormatter.string(from: self, timeZone: TimeZone.current, formatOptions: .withInternetDateTime)
         } else {
             var buffer = [CChar](repeating: 0, count: 25)
-            var time = time_t(self.timeIntervalSince1970)
+            var time = time_t(timeIntervalSince1970)
             strftime_l(&buffer, buffer.count, "%FT%T%z", localtime(&time), nil)
             return String(cString: buffer)
         }
@@ -50,7 +51,6 @@ extension Date {
 }
 
 extension Date {
-
     public static func today() -> Date {
         return Date()
     }
@@ -68,9 +68,8 @@ extension Date {
     }
 
     public func get(_ direction: SearchDirection,
-             _ weekDay: Weekday,
-             considerToday consider: Bool = false) -> Date {
-
+                    _ weekDay: Weekday,
+                    considerToday consider: Bool = false) -> Date {
         let dayName = weekDay.rawValue
 
         let weekdaysName = getWeekDaysInEnglish().map { $0.lowercased() }
@@ -81,13 +80,12 @@ extension Date {
 
         let calendar = Calendar(identifier: .gregorian)
 
-        if consider && calendar.component(.weekday, from: self) == searchWeekdayIndex {
+        if consider, calendar.component(.weekday, from: self) == searchWeekdayIndex {
             return self
         }
 
         var nextDateComponent = DateComponents()
         nextDateComponent.weekday = searchWeekdayIndex
-
 
         let date = calendar.nextDate(after: self,
                                      matching: nextDateComponent,
@@ -96,10 +94,10 @@ extension Date {
 
         return date!
     }
-
 }
 
 // MARK: Helper methods
+
 extension Date {
     public func getWeekDaysInEnglish() -> [String] {
         var calendar = Calendar(identifier: .gregorian)
